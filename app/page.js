@@ -70,7 +70,7 @@ export default function Home() {
 </div>
       </div>
 
-      <div className="bg-white h-1 opacity-12 mt-6"></div>
+      {/* <div className="bg-white h-1 opacity-12 mt-6"></div> */}
 
 
     </>
