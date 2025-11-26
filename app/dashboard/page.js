@@ -25,6 +25,7 @@ const Dashboard = () => {
   const getdata = async () => {
     const u = await fetchuser(session.user.username);
     setForm(u || {});
+    console.log("SESSION ON CLIENT:", session);
     // console.log("Loaded user:", u);
   };
 
