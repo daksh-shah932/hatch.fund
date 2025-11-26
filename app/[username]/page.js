@@ -8,7 +8,7 @@ import connectDb from "../db/connectDb";
 import User from "../models/User";
 
 export default async function Username({ params }) {
-  const { username } = await params;   // ⬅️ await fixes sync-dynamic
+  const { username } = params;   // FIXED – no await
 
   await connectDb();
   const u = await User.findOne({ username });
@@ -19,7 +19,7 @@ export default async function Username({ params }) {
 }
 
 export async function generateMetadata({ params }) {
-  const { username } = await params;  // ⬅️ must await here too
+  const { username } = params;  // FIXED – no await
 
   return {
     title: `${username} - HatchFund`,
