@@ -8,8 +8,10 @@ const connectDb = async () => {
   }
 
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/egg");
-    // console.log("✅ MongoDB Connected");
+    await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: "egg",   // 👈 VERY IMPORTANT
+    });
+    console.log("🌐 Connected to MongoDB Atlas");
   } catch (error) {
     console.error("❌ MongoDB connection failed:", error.message);
   }
