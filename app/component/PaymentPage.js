@@ -55,26 +55,26 @@ const PaymentPage = ({ username }) => {
     setcurruser(u);
     let dbpayments = await fetchpayments(username);
     setPayments(dbpayments);
-    // console.log("Fetched payments:", dbpayments);
-    // console.log("Fetched user:", u);
+    console.log("Fetched payments:", dbpayments);
+    console.log("Fetched user:", u);
 
   }
 
 
   const pay = async (amount) => {
-    // console.log("🔍session.user.name", session?.user.name);
+    console.log("🔍session.user.name", session?.user.name);
     let a = await initiate({
       amount,
       to_username: session?.user.email.split("@")[0],
       Payment_form: paymentForm
     });
-    // console.log("🧾 Initiate response:", a);
+    console.log("🧾 Initiate response:", a);
     const orderid = a?.order?.id;
     if (!orderid) {
       alert("Order creation failed. Please try again.");
       return;
     }
-    // console.log("🧾 Order ID:", orderid);
+    console.log("🧾 Order ID:", orderid);
     const options = {
       key: curruser.razorpayId, // Enter the Key ID generated from the Dashboard
       amount: amount * 100,
@@ -87,7 +87,7 @@ const PaymentPage = ({ username }) => {
       // callback_url: `${process.env.NEXT_PUBLIC_URL}/api/razorpay`,
 
       handler: async function (response) {
-        // console.log("🔔 Payment success:", response);
+        console.log("🔔 Payment success:", response);
 
         const verifyRes = await fetch("/api/razorpay", {
           method: "POST",
@@ -100,7 +100,7 @@ const PaymentPage = ({ username }) => {
 
         // ✅ Parse ONLY ONCE
         const result = await verifyRes.json();
-        // console.log("🔍 Verification result:", result);
+        console.log("🔍 Verification result:", result);
 
 
         if (result?.redirectUrl) {
@@ -115,7 +115,7 @@ const PaymentPage = ({ username }) => {
 
       modal: {
         ondismiss: function () {
-          // console.log("Checkout closed by user");
+          console.log("Checkout closed by user");
         },
       },
     };
